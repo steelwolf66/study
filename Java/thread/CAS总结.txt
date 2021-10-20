@@ -1,0 +1,12 @@
+CAS 理解
+
+compare and swap 对比并替换 
+三个关键要素 替换的位置，期待的旧值，新值
+
+CAS 存在的三个问题 
+1.ABA的问题
+解决办法：加版本号 ，JDK使用AtomicStampedReference来解决该问题，compareAndSet方法，会对比引用及预期标志
+2.循环时间长，开销大
+自旋CAS，长时间不成功，会造成CPU开销加大，
+3.只能保证一个共享变量的操作是原子操作
+AtomicReference这个类是可以传对象的，保证整个引用对象都是原子操作

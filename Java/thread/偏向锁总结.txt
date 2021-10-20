@@ -1,0 +1,25 @@
+重入锁
+做CAS compare and swap 操作
+
+CAS失败，则会在thread栈中，生成另外一条lock record ,正常只有一条
+而第二条lock record 不会和对象的markWord交换地址成功，只会计数，加了几次相同的锁
+
+这种情况就发生在
+
+public synchronized void methodA(){
+methodB();
+}
+public sychronized void methodB(){
+}
+一个线程调用methodA,则会发生锁重入
+
+获取monitor中的owner,类比故事翻书包的过程
+偏向锁总结
+轻量级锁，在没有竞争是，每次重入，仍然要执行CAS操作
+java引入偏向锁，进一步优化
+第一次使用CAS是，将线程id设置到对象的mark word 头里，后面直接对比
+这个线程id，不用做CAS操作（CAS对应的CPU指令，仍然耗费一些性能）
+这个锁就偏向这个线程
+
+
+
