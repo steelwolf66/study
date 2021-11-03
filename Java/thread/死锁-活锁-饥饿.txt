@@ -1,0 +1,37 @@
+1.死锁
+两个（或者更多）互相持有对方想要的锁，导致线程都不能继续执行
+eg:
+thread1
+synchronized(A){
+	synchronized(B){
+	
+	}
+}
+
+thread2
+synchronized(B){
+	synchronized(A){
+	
+	}
+}
+
+2.活锁
+两个（或者多个线程）互相改变条件，导致线程一直执行，不能停止，一般在for循环或者while循环中出现
+eg:
+count = 10;
+thread1
+while(count>0){
+	count--;
+}
+
+thread2
+while(count<10){
+	count++;
+}
+这种情况就导致线程都不能结束
+
+3.饥饿
+饥饿是指在多个线程运行过程中，一个或几个线程获取CPU时间片概率极低，几乎得不到运行
+
+eg:科学家就餐问题
+在中间的线程可能会一直获取到锁，而其他线程不能，这就是饥饿问题
