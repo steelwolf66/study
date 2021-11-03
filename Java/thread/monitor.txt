@@ -1,0 +1,24 @@
+monitor 
+java实现synchronized的原理
+每个对象，通过对象头中的markWord，关联monitor
+
+monitor有三个重要属性
+owner
+entryList
+waitSet
+
+owner 是当前对象被持有锁的线程
+entryList
+是当一个线程持有这把锁，但是，此时，又有其他的线程来尝试获取这把锁，
+那么，其他的线程就要进入到entryList中进行排队
+穿插一个公平锁和非公平锁的概念
+
+公平锁即在entryList中是FIFO的，先进先出，锁被释放时，entryList按照顺序获取锁
+非公平锁就是从entryList中随机一个线程来获取锁
+有利有弊，公平锁耗费CPU资源。主要还是看业务场景需要
+
+waitSet 
+是当线程已经获取过monitor锁了，但是调用了wait方法，这时，线程会释放锁，然后进入waitSet中等待，所有调用了wait的线程都会进入这个waitSet
+然后再调用notify（）或者notifyAll()来随机唤醒一个线程或者全部线程；唤醒了全部就会重新竞争，就是上边说的entryList中；
+随机唤醒一个不会发生竞争，唤醒全部就会竞争；这里也是要具体问题具体分析；
+全部唤醒，就都有机会获取CPU时间片；随机唤醒一个之后，其余未被唤醒的线程，不会出来抢占CPU；
