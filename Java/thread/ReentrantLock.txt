@@ -1,0 +1,17 @@
+ReentrantLock总结
+
+首先和Synchronized相比
+ReentrantLock是java API 层级的使用，在使用的过程中
+lock()和 unLock()方法要成对出现；为防止死锁，unLock()应该放在finally{}块中
+而且提供获取锁超时API,tryLock(); 不至于一直等待下去
+
+而Synchronized是使用创建monitor与对象关联的方式来执行同步代码，
+这里就会有效率的问题；但是语法逻辑更为简单，执行完同步代码块中的代码后，会自动释放锁。
+
+ReentrantLock提供了condition的调用方式
+
+通过condition提供的await()及signal()方法，可以实现指定线程的等待和唤醒
+并且，ReentrantLock支持多个condition
+还支持公平锁（默认创建非公平）
+synchronized使用的是非公平锁的机制
+
