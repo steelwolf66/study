@@ -1,0 +1,9 @@
+1.导入数据时，日期格式不正确
+alter session set NLS_DATE_FORMAT = 'DD-MONTH-YYYY HH12:MI:SS AM';
+alter session set nls_date_language='american';
+注意这两条语句要在 command窗口执行
+之后再接@加文件进行导入
+
+2.导出数据库语句
+exp i16_poc/1@192.168.100.234/ztaxdev file=D:/i16_poc.dmp
+前提是本地装了oracle客户端
