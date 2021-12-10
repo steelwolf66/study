@@ -1,1 +1,4 @@
-1
+【排序相关问题】
+1.多个字段排序时，可在每个字段后边加入 desc/asc
+eg:select * from order_by t order by t.del_flg desc ,t.name desc;
+按照顺序来依次进行排序
