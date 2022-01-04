@@ -2,3 +2,7 @@
 1.多个字段排序时，可在每个字段后边加入 desc/asc
 eg:select * from order_by t order by t.del_flg desc ,t.name desc;
 按照顺序来依次进行排序
+
+【导入SQL】
+mysql -p123456 -D pay_juhe_git -s -N -f < init.sql
+导入init.sql文件，并忽略报错 -D指定数据库
