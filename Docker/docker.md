@@ -1,6 +1,6 @@
 # docker 笔记
 
-## 1.Dockerfile
+## 一、Dockerfile
 
 ### 1)build上下文
 
@@ -35,3 +35,14 @@ ADD区别于COPY的两个功能 ：
 1）解压压缩文件并把它们添加到镜像中
 
 2）从url拷贝文件到镜像中（不推荐使用）
+
+## 二、docker网络
+
+### 1.重建docker0 网络
+
+pkill docker 
+iptables -t nat -F 
+ifconfig docker0 down 
+brctl delbr docker0 
+docker -d 
+service docker restart
