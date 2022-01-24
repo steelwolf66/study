@@ -86,11 +86,13 @@ spring:
           uri: http://localhost:9101/     # 目标URI,路由到微服务的地址（也就是最终转发地址）
           predicates:                     # 断言(判断条件)
           
+
             - Path=/goods/**              # 匹配对应 URL 的请求,将匹配到的请求追加在目标 URI 之后
           
               ------
-          
-              
+
+
+​              
 
 #### 三、过滤器
 
@@ -130,3 +132,12 @@ spring:
 
 
 
+```
+hikari
+```
+
+
+
+公共组件
+
+mybatis
